@@ -1,4 +1,7 @@
 import re
+import os
+
+outputFile = "output.mp4"
 
 text = '''Videos for download
 https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/playlist.m3u8
@@ -261,6 +264,12 @@ def findVideoUrl(rawStr):
 	audioUrl = audioMatches[len(audioMatches) -1]
 	print(audioUrl)
 
+	runDownloader(videoURL, audioUrl)
 
+def runDownloader(videoURL, audioURL):
+	command = "./download_m3u8 "+ videoURL + " " + audioURL + " " + outputFile
+	print("Running command: " + command)
+
+	os.system(command)
 
 findVideoUrl(text)

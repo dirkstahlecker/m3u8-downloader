@@ -9,14 +9,12 @@ else
 	outputPath=output.mp4
 fi
 
-
 echo $videoPath
 echo $audioPath
 echo $outputPath
 
 videoTempPath=video.mp4
 audioTempPath=audio.ts
-
 
 #get video
 ffmpeg -i $videoPath -c copy video.mp4 > /dev/null 2>&1
