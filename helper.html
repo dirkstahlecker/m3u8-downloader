@@ -1,0 +1,31 @@
+<html>
+<head>
+	<style>
+		input {width: 400px;}
+	</style>
+	<script>
+		function onSubmit()
+		{
+			const videoURL = document.getElementById("videoURL").value;
+			const audioURL = document.getElementById("audioURL").value;
+			const outputFolder = document.getElementById("outputFolder").value;
+			const outputFileName = document.getElementById("outputFileName").value
+
+			let command = "./download_m3u8 "+ videoURL + " " + audioURL + " " + outputFolder + outputFileName;
+			document.getElementById("commandToCopy").value = command;
+	}
+	</script>
+</head>
+<body>
+	Video URL: <input id="videoURL" type="text"/>
+	<br/>
+	Audio URL: <input id="audioURL" type="text"/>
+	<br/>
+	Output Folder: <input id="outputFolder" type="text" value="/users/dirkstahlecker/Desktop/"/>
+	<br/>
+	Output File Name: <input id="outputFileName" type="text"/>
+	<br/>
+	<button id="submit" onClick="onSubmit()">Submit</button>
+	<input id="commandToCopy" type="text"/>
+</body>
+</html>
