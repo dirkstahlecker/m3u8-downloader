@@ -4,8 +4,13 @@ videoPath=$1
 #videoPath=https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/1080p_5800k_v4.m3u8
 audioPath=$2
 #audioPath=https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/192k_audio_v4.m3u8
-outputPath=$3
-#outputPath=output.mp4
+
+if [ $3 != "" ]; then
+	outputPath=$3
+else
+	outputPath=output.mp4
+fi
+
 
 echo $videoPath
 echo $audioPath
