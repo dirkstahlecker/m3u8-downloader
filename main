@@ -1,8 +1,11 @@
- #! /usr/bin/env ksh
+ #! /usr/bin/env bash
 
-videoPath=$0
-audioPath=$1
-outputPath=$2
+#videoPath=$0
+videoPath=https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/1080p_5800k_v4.m3u8
+#audioPath=$1
+audioPath=https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/192k_audio_v4.m3u8
+#outputPath=$2
+outputPath=output.mp4
 
 videoTempPath=video.mp4
 audioTempPath=audio.ts
@@ -21,23 +24,27 @@ echo $outputPath
 #get video
 echo "getting video"
 ffmpeg -i $videoPath -c copy video.mp4 > /dev/null 2>&1
-wait
+PID=$!
+wait $PID
 echo "got video"
 
 #get audio
 echo "getting audio"
 ffmpeg -i $audioPath -c copy -map a audio.ts > /dev/null 2>&1
-wait
+PID=$!
+wait $PID
 echo "got audio"
 
 #combine
 echo "combining"
 ffmpeg -i $videoTempPath -i $audioTempPath -c:v copy -c:a aac $outputPath > /dev/null 2>&1
-wait
-echo "finished}
+PID=$!
+wait $PID
+echo "finished"
 
 
 #clean up
+echo "cleaning up"
 rm $videoOutputPath
 rm $audioOutputPath
 
