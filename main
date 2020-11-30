@@ -1,51 +1,42 @@
  #! /usr/bin/env bash
 
-#videoPath=$0
-videoPath=https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/1080p_5800k_v4.m3u8
-#audioPath=$1
-audioPath=https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/192k_audio_v4.m3u8
-#outputPath=$2
-outputPath=output.mp4
-
-videoTempPath=video.mp4
-audioTempPath=audio.ts
-
-#if [[ -e $2 ]]
-#then
-#	outputPath=$2
-#else
-#	outputPath="output.mp4"
-#fi
+videoPath=$1
+#videoPath=https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/1080p_5800k_v4.m3u8
+audioPath=$2
+#audioPath=https://damb2tknfsomm.cloudfront.net/uploaded/JQLqNkmwzaMN7BLP1DOoLjZPzblJ9Y4W/192k_audio_v4.m3u8
+outputPath=$3
+#outputPath=output.mp4
 
 echo $videoPath
 echo $audioPath
 echo $outputPath
 
+videoTempPath=video.mp4
+audioTempPath=audio.ts
+
+
 #get video
 echo "getting video"
 ffmpeg -i $videoPath -c copy video.mp4 > /dev/null 2>&1
-PID=$!
-wait $PID
+wait
 echo "got video"
 
 #get audio
 echo "getting audio"
 ffmpeg -i $audioPath -c copy -map a audio.ts > /dev/null 2>&1
-PID=$!
-wait $PID
+wait
 echo "got audio"
 
 #combine
 echo "combining"
 ffmpeg -i $videoTempPath -i $audioTempPath -c:v copy -c:a aac $outputPath > /dev/null 2>&1
-PID=$!
-wait $PID
+wait
 echo "finished"
 
 
 #clean up
 echo "cleaning up"
-rm $videoOutputPath
-rm $audioOutputPath
+rm $videoTempPath
+rm $audioTempPath
 
-return 0
+echo "done"
