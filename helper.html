@@ -9,10 +9,12 @@
 			const videoURL = document.getElementById("videoURL").value;
 			const audioURL = document.getElementById("audioURL").value;
 			const outputFolder = document.getElementById("outputFolder").value;
-			const outputFileName = document.getElementById("outputFileName").value;
+			let outputFileName = document.getElementById("outputFileName").value;
+
+			outputFileName = outputFileName.replaceAll(" ", "_");
 
 			const commandToCopyEl = document.getElementById("commandToCopy");
-			let command = "./download_m3u8 "+ videoURL + " " + audioURL + " " + outputFolder + outputFileName;
+			let command = './download_m3u8 ' + '"' + videoURL + '"' + " " + '"' + audioURL + '"' + " " + '"' + outputFolder + outputFileName  + '.mp4"';
 			commandToCopyEl.value = command;
 
 			commandToCopyEl.select();
@@ -32,9 +34,10 @@
 	<br/>
 	Audio URL: <input id="audioURL" type="text"/>
 	<br/>
-	Output Folder: <input id="outputFolder" type="text" value="/users/dirkstahlecker/Desktop/"/>
+	Output Folder: <input id="outputFolder" type="text" value="/users/dirkstahlecker/Desktop/floracing/"/>
 	<br/>
 	Output File Name: <input id="outputFileName" type="text"/>
+	<br/>
 	<br/>
 	<button id="submit" onClick="onSubmit()">Submit</button>
 	<input id="commandToCopy" type="text"/>
