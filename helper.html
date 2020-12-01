@@ -9,11 +9,22 @@
 			const videoURL = document.getElementById("videoURL").value;
 			const audioURL = document.getElementById("audioURL").value;
 			const outputFolder = document.getElementById("outputFolder").value;
-			const outputFileName = document.getElementById("outputFileName").value
+			const outputFileName = document.getElementById("outputFileName").value;
 
+			const commandToCopyEl = document.getElementById("commandToCopy");
 			let command = "./download_m3u8 "+ videoURL + " " + audioURL + " " + outputFolder + outputFileName;
-			document.getElementById("commandToCopy").value = command;
-	}
+			commandToCopyEl.value = command;
+
+			commandToCopyEl.select();
+			document.execCommand("copy");
+		}
+
+		function onClear()
+		{
+			document.getElementById("videoURL").value = "";
+			document.getElementById("audioURL").value = "";
+			document.getElementById("outputFileName").value = "";
+		}
 	</script>
 </head>
 <body>
@@ -27,5 +38,7 @@
 	<br/>
 	<button id="submit" onClick="onSubmit()">Submit</button>
 	<input id="commandToCopy" type="text"/>
+	<br/>
+	<button id="clear" onClick="onClear()">Clear</button>
 </body>
 </html>
