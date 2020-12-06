@@ -18,12 +18,14 @@ videoTempPath=video.mp4
 audioTempPath=audio.ts
 
 #get video
-ffmpeg -i $videoPath -c copy video.mp4 > /dev/null 2>&1
+ffmpeg -i $videoPath -c copy video.mp4
 wait
+echo "Downloaded video"
 
 #get audio
-ffmpeg -i $audioPath -c copy -map a audio.ts > /dev/null 2>&1
+ffmpeg -i $audioPath -c copy -map a audio.ts
 wait
+echo "Downloaded audio"
 
 #combine
 ffmpeg -i $videoTempPath -i $audioTempPath -c:v copy -c:a aac $outputPath

@@ -4,6 +4,17 @@
 		input {width: 400px;}
 	</style>
 	<script>
+		function cleanName(outputFileName)
+		{
+			outputFileName = outputFileName.replaceAll(" ", "_");
+			// outputFileName = outputFileName.replaceAll(/-|:|\\|\//, "_");
+			outputFileName = outputFileName.replaceAll("-", "_");
+			outputFileName = outputFileName.replaceAll(":", "_");
+			outputFileName = outputFileName.replaceAll("\\", "_");
+			outputFileName = outputFileName.replaceAll("\/", "_");
+			return outputFileName;
+		}
+
 		function onSubmit()
 		{
 			const videoURL = document.getElementById("videoURL").value;
@@ -11,7 +22,7 @@
 			const outputFolder = document.getElementById("outputFolder").value;
 			let outputFileName = document.getElementById("outputFileName").value;
 
-			outputFileName = outputFileName.replaceAll(" ", "_");
+			outputFileName = cleanName(outputFileName);
 
 			const commandToCopyEl = document.getElementById("commandToCopy");
 			let command = './download_m3u8 ' + '"' + videoURL + '"' + " " + '"' + audioURL + '"' + " " + '"' + outputFolder + outputFileName  + '.mp4"';
@@ -26,6 +37,7 @@
 			document.getElementById("videoURL").value = "";
 			document.getElementById("audioURL").value = "";
 			document.getElementById("outputFileName").value = "";
+			document.getElementById("commandToCopy").value = "";
 		}
 	</script>
 </head>
